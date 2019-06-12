@@ -1,0 +1,67 @@
+#!/bin/bash
+
+PHP_MODULES="sqlsrv pdo_sqlsrv"
+PHP_INI1="sqlsrv"
+PHP_INI2="odbcinst"
+
+PHP_INI1_PATH=/etc/php.d
+PHP_INI2_PATH=/etc
+PHP_MODULE_PATH=/usr/lib64/php/modules
+
+function get_php_master_extension_dir() {
+    while IFS=" => " read -a values; do
+        echo "${values[2]}"
+    done <<< $(php -i 2>&1|grep '^extension_dir')
+}
+
+PHP_EXTENSION_PATH=$(get_php_master_extension_dir)
+
+function link_files() {
+    local source_path dest_path items extension pattern
+    source_path="$1"
+    dest_path="$2"
+    items="$3"
+    extension="$4"
+
+    while IFS=' ' read -a pkg; do
+        for i in "${pkg[@]}" ; do
+            if [[ ${extension} == "ini" ]]; then
+                pattern=".*\/[0-9]+?\-?${i}\.ini"
+            elif [[ ${extension} == "so" ]]; then
+                pattern=".*\/${i}\.so"
+            fi
+
+            if [[ -n "${pattern}" ]]; then
+                #If matched, return highest priority ini file
+                MATCH=$(find "${source_path}" -regex ${pattern}|head -1|sed 's/^.*\///')
+                if [[ -n "${MATCH}" ]]; then
+                    ln -s $(realpath ${source_path})/${MATCH} ${dest_path}
+                    #echo $(realpath ${source_path})/"${MATCH}"
+                fi
+            fi
+        done
+    done <<< "$(echo $items)"
+}
+
+# Add extra php ini files
+link_files "${PHP_INI1_PATH}" "${PHP_SYSCONF_PATH}/php.d" "${PHP_INI1}" ini
+link_files "${PHP_INI2_PATH}" "${PHP_SYSCONF_PATH}/php.d" "${PHP_INI2}" ini
+# Add extra php so files
+link_files "${PHP_MODULE_PATH}" "${PHP_EXTENSION_PATH}" "${PHP_MODULES}" so
+
+# Set the timezone
+ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+
+# Change ports back to defaults
+sed -i "s/\(^Listen.*:\)8080$/\180/" ${HTTPD_MAIN_CONF_PATH}/httpd.conf
+sed -i "s/\(^Listen.*:\)8443/\1443/" ${HTTPD_MAIN_CONF_D_PATH}/ssl.conf
+sed -i "s/_default_:8443/_default_:443/" ${HTTPD_MAIN_CONF_D_PATH}/ssl.conf
+
+# Change default user's homedir
+sed -i "s/\(:1001:.*:\)\/opt\/app-root\/src:/\1\/opt\/app-root:/" /etc/passwd
+
+# Output Apache logs to file
+if [[ ${APACHE_LOGS,,} == "true" ]] || [[ ${APACHE_LOGS} == 1 ]]; then
+    sed -i "s/\(ErrorLog[[:space:]]\+[\"']\).*\([\"']\)/\1\/var\/log\/httpd\/error\.log\2/" ${HTTPD_MAIN_CONF_PATH}/httpd.conf
+    sed -i "s/\(CustomLog[[:space:]]\+[\"']\).*\([\"']\)/\1\/var\/log\/httpd\/access\.log\2/" ${HTTPD_MAIN_CONF_PATH}/httpd.conf
+fi

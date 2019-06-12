@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+
+  webserver:
+    build: 
+      context: ./bin/webserver
+      args:
+        - APACHE_LOGS=${APACHE_LOGS}
+    container_name: ${CONTAINER_PREFIX}-7.2.x-webserver
+    restart: "no"
+    expose:
+      - "80"
+    volumes:
+      - "${DOCUMENT_ROOT-./www}:/opt/app-root/src"
+      - "${APACHE_LOG_DIR-./logs/httpd}:/var/log/httpd"
+      - "${PHP_INI-./config/php/99-php.ini}:/etc/opt/rh/rh-php72/php.d/99-php.ini"
+      - "./config/php/browscap.ini:/etc/opt/rh/rh-php72/php.d/browscap.ini"
+    environment:
+      - VIRTUAL_HOST=${VHOST}.${VDOMAIN}
+      - HOME=${APP_ROOT}
+
+  mysql:
+    build:
+      context: ./bin/mysql
+      args:
+        - MYSQL_LOGS=${MYSQL_LOGS}
+    container_name: ${CONTAINER_PREFIX}-5.7.x-mysql
+    restart: "no"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql"
+      - "${MYSQL_LOG_DIR-./logs/mysql}:/var/log/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

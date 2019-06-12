@@ -1,0 +1,5 @@
+data/mysql
+logs/httpd
+logs/mysql
+www
+docker-compose_orig.yml
