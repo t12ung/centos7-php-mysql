@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script requires perl command for multiline regex.
 
 # Color vars
@@ -428,12 +428,17 @@ cd %WINDIR%\\\System32\\\drivers\\\etc"
   fi
 fi
 
-echo -e "\nIf you are using Nginx Web Proxy, you should start that service first.\n\n\
-Run and build your Docker Containers with:\n\
+if [[ "${NGINX_PROXY,,}" == "true" ]]; then
+echo -e "\nAs you have chosen to use the Nginx Web Proxy, you should start that service first:\n\
+${_BLD}${Cyan}\$${_RST_}${_BLD} docker network create nginx-proxy${_RST_} (create the network)
+${_BLD}${Cyan}\$${_RST_}${_BLD} docker-compose up${_RST_} (start service from Nginx container directory)"
+fi
+
+echo -e "\nRun and build your Docker Containers with:\n\
 docker-compose up --build\n\n\
 Confirm access to your website works (you should see a phpinfo page).\n\n\
 To open a shell to your docker containers, run:\n\
-web : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-7.2.x-webserver bash\n\
+web : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-7.3.x-webserver bash\n\
 db  : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-5.7.x-mysql bash\n\n\
 After confirming your servers are working, copy your website code folder into the ${_BLD}www${_RST_} directory \
 (or checkout your code as a directory), and update ${_BLD}${Blue}DOCUMENT_ROOT${_RST_} in the .env file. \

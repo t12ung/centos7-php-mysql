@@ -7,15 +7,15 @@ services:
       context: ./bin/webserver
       args:
         - APACHE_LOGS=${APACHE_LOGS}
-    container_name: ${CONTAINER_PREFIX}-7.2.x-webserver
+    container_name: ${CONTAINER_PREFIX}-7.3.x-webserver
     restart: "no"
     expose:
       - "80"
     volumes:
       - "${DOCUMENT_ROOT-./www}:/opt/app-root/src"
       - "${APACHE_LOG_DIR-./logs/httpd}:/var/log/httpd"
-      - "${PHP_INI-./config/php/99-php.ini}:/etc/opt/rh/rh-php72/php.d/99-php.ini"
-      - "./config/php/browscap.ini:/etc/opt/rh/rh-php72/php.d/browscap.ini"
+      - "${PHP_INI-./config/php/99-php.ini}:/etc/opt/rh/rh-php73/php.d/99-php.ini"
+      - "./config/php/browscap.ini:/etc/opt/rh/rh-php73/php.d/browscap.ini"
     environment:
       - VIRTUAL_HOST=${VHOST}.${VDOMAIN}
       - HOME=${APP_ROOT}

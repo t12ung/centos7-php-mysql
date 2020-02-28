@@ -6,7 +6,7 @@
 [![Poweredby: CentOS](https://img.shields.io/badge/platform-CentOS_7-lightgrey.svg?style=plastic&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAA3NCSVQICAjb4U/gAAABgFBMVEUMC2empcfunAiOxgxCQYn41Zfn88yJCmqv11T1tzXLz+GqUZWGCGlxcKba5LXt2un5/PLXrc34y38lKIPM5pLF4oOgPIn76cibMoNcaKyczSn1+ui2aqW5vNvnzuHvpSD8vme14nPv2rn37fXW4qzNo8fm4ODeu9XT6KAZGG6xZK6NFnK0rs2IiLXt5uGw3WL5ulpSUZPl8cY5OIOZziK6dLL/9u6i0DjZ2ef////s9tb2pQ/vqSrz5O/13aeuXqr54LOTIXnl1L5jXa388d39z4rct9Oy2FkgH3SUyRnExNnJ55LR74f1xnJWXqLe7rjkyN40M4DC4Xz49/rDhbX92orZ7K6s2jvu1ar658PD6GUQD2rytkh+e7S+YqzZs9D///XwqzD96L/+6s6oTZOeOIasrsdtaLCgzzLb2+i1tdD07fze5r3/zGbr+cS+vtb+897l5e+TzxXq1OXv996j1UJmZpmRxxLG5Ig/Pobuoxna6ajunxCKD20nKHlISY1bgPtFAAAAgHRSTlP///////////////////////////////////////////////////////////////////////////8A/////////////////////////////////////////////////////////////////////////////////////////////90d+1QAAAAJcEhZcwAACvAAAArwAUKsNJgAAAAgdEVYdFNvZnR3YXJlAE1hY3JvbWVkaWEgRmlyZXdvcmtzIE1Yu5EqJAAAAiFJREFUeJyF0v1X0lAYB/BBCoKQjCQICBAivA5irDmZKbES3TDiZWoRGu8ESPEeMWD8624gx5044ve3e+7nPue59z4Q+USg/9YtYjU4yV8Tq0DxiONUrccBgaryedXv3DKwXMXjI11vNFLo9TYYdh27s9msSwKwATPwY2bm2U7k8qNGY0qUNMgkIQEKfLChw3Ezk4pc7iHUxMSWJ5RNCgYG//YuswAIfLFpVUoBZsAUG7sjZgYmiOfipa1r9UiALs4cHJ5tX816UAr7W2UqwUpAD8dxUYx2IpG90/3SVhlBqOMH4GngZjNePfQbdLHYrbXUNSEUhWTVC+A2NTqdDj7AsbPzQmG/lKCUiJDTZH0O3ErTu+di3jRYjCQTrMcNi6nxwCuC7gShNn/eRzjC/v36apYAT4OgWAGemLpeMbKoK0qSadb53SnmbTIjm/cAl5sZAADEq6c3f7AIWuDGHMd9cL6QLW5hqwOeB++DU+1tKkXoHcKv2+32T68f3qFN02BYm97Uf305d4QiaDEvlGhJHoqN0sPamq8JfRaAPLyOnuS5Qk4Cmtqgeuirg4xQITYeh9ZRo1GflgA1pA34KoAGIuDsgnDo5UUpoDNrbBLw94Cz567HdimIZgAUiCYz8x7GR2lUzo2NEuDy1uuydrtSURv+FUOhFhEKh8PE8lTnfnyrVvt+3fJUL9LrM8LkkI8D0tI/6JGrAGmxkKvBUp4Ed8ZO8cQUstPVAAAAAElFTkSuQmCC&logoColor=white&labelColor=131e35)](https://www.centos.org/)
 [![Poweredby: Apache](https://img.shields.io/badge/apache-v2.4-lightgrey.svg?style=plastic&logo=apache&logoColor=white&labelColor=D22128)](https://www.apache.org/)
 [![Poweredby: MySQL](https://img.shields.io/badge/MySQL-%3E=5.7-lightgrey.svg?style=plastic&logo=mysql&logoColor=white&labelColor=0074a3)](https://www.mysql.com)
-[![Poweredby: PHP](https://img.shields.io/badge/php-%3E=7.2-lightgrey.svg?style=plastic&logo=php&logoColor=white&labelColor=8892BF)](http://www.php.net/)
+[![Poweredby: PHP](https://img.shields.io/badge/php-%3E=7.3-lightgrey.svg?style=plastic&logo=php&logoColor=white&labelColor=8892BF)](http://www.php.net/)
 
 This LAMP stack runs on Docker so you should install that first if you've not already done so. The stack _should_ be compatible with Linux, Windows or MacOS. For windows, although not necessary, you should either install WSL or GitBash to be able to run the `setup.sh` script.
 
@@ -14,7 +14,7 @@ The docker containers are built according to the configuration of the `docker-co
 
 ##### mysql - (mysql:5.7)
 - mysqld options via `99-mysql.cnf` file to enable log files
-##### webserver - (centos/php-72-centos7)
+##### webserver - (centos/php-73-centos7)
 - Additional package repositories
 - Additional packages/php modules installed
   - browscap (Lite)
