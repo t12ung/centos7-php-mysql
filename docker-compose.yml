@@ -25,7 +25,7 @@ services:
       context: ./bin/mysql
       args:
         - MYSQL_LOGS=${MYSQL_LOGS}
-    container_name: ${CONTAINER_PREFIX}-5.7.x-mysql
+    container_name: ${CONTAINER_PREFIX}-8.0.x-mysql
     restart: "no"
     ports:
       - "3306:3306"

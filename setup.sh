@@ -358,7 +358,7 @@ echo -e "\nYour Docker Compose file is now configured. After you have built your
 You can access your website at:\n\
 http://${VHOST_NAME}.${VDOMAIN_NAME}${HTTPD_PORT}/\n\n\
 Configure your website to connect to the database on:\n\
-Host: ${DOCKER_CONTAINER}-5.7.x-mysql\n\
+Host: ${DOCKER_CONTAINER}-8.0.x-mysql\n\
 Port: 3306\n\
 Username/Password can be found in the .env file\n\n\
 Configure your MySQL client to connect to the database on:\n\
@@ -439,7 +439,7 @@ docker-compose up --build\n\n\
 Confirm access to your website works (you should see a phpinfo page).\n\n\
 To open a shell to your docker containers, run:\n\
 web : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-7.3.x-webserver bash\n\
-db  : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-5.7.x-mysql bash\n\n\
+db  : ${WINPTY}docker exec -it ${DOCKER_CONTAINER}-8.0.x-mysql bash\n\n\
 After confirming your servers are working, copy your website code folder into the ${_BLD}www${_RST_} directory \
 (or checkout your code as a directory), and update ${_BLD}${Blue}DOCUMENT_ROOT${_RST_} in the .env file. \
 You need to ${_BLD}restart${_RST_} the webserver container for the DOCUMENT_ROOT change to take effect."

@@ -12,7 +12,7 @@ This LAMP stack runs on Docker so you should install that first if you've not al
 
 The docker containers are built according to the configuration of the `docker-compose.yml` file, which consists of two containers - web server & database server. `docker-compose` commands ([CLI reference](https://docs.docker.com/compose/reference/overview/)) must be run from the directory where the `yml` file is located as it references the containers by **service name**. Alternatively, you can run the equivalent `docker` command and specify either **container ID or NAME**. The docker images of each are based on _official_ docker images. The customisation of these are as follows:
 
-##### mysql - (mysql:5.7)
+##### mysql - (mysql:8.0)
 - mysqld options via `99-mysql.cnf` file to enable log files
 ##### webserver - (centos/php-73-centos7)
 - Additional package repositories
