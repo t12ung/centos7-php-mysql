@@ -15,8 +15,8 @@ RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos
 
 # Install Extra packages - custom-init script for loading of non-default packages
 RUN INSTALL_PKGS="sclo-php73-php-pecl-geoip sclo-php73-php-pecl-igbinary sclo-php73-php-pecl-imagick \
-                  sclo-php73-php-pecl-memcached sclo-php73-php-pecl-ssh2 sclo-php73-php-tidy \
-                  sclo-php73-php-pecl-uuid \
+                  sclo-php73-php-pecl-memcached libsodium sclo-php73-php-sodium sclo-php73-php-pecl-ssh2 \
+                  sclo-php73-php-tidy sclo-php73-php-pecl-uuid \
                   rh-php73-php-odbc rh-php73-php-xmlrpc \
                   msodbcsql17 php-sqlsrv \
                   rh-php73-php-pecl-xdebug \
